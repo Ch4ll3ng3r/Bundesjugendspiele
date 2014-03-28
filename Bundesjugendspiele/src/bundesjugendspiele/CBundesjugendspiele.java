@@ -10,6 +10,7 @@ public class CBundesjugendspiele {
 				+ TestSpieler.klasse() + "\n"
 				+ TestSpieler.jahrgang());
 
+		//Window folgt
 	}
 
 }
