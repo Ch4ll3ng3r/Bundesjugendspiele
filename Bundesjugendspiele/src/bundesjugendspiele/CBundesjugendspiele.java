@@ -2,6 +2,7 @@ package bundesjugendspiele;
 
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
@@ -11,9 +12,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JProgressBar;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JList;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CBundesjugendspiele {
 
@@ -26,11 +32,16 @@ public class CBundesjugendspiele {
 	private JTextField txtSprung;
 	private JTextField txtWurf;
 	private JTextField txtDisziplin;
+	
+	private String m_strName, m_strVorname, m_strKlasse;
+	private int m_iJahrgang, m_iLauf, m_iWurf, m_iSprung, m_iDisziplin;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -197,7 +208,9 @@ public class CBundesjugendspiele {
 		frame.getContentPane().add(txtDisziplin);
 		txtDisziplin.setColumns(10);
 		
-		JList list = new JList();
+		final DefaultListModel ListModel = new DefaultListModel();
+		final JList list = new JList();
+		list.setModel(ListModel);
 		springLayout.putConstraint(SpringLayout.EAST, txtDisziplin, -64, SpringLayout.WEST, list);
 		springLayout.putConstraint(SpringLayout.NORTH, list, 6, SpringLayout.SOUTH, lblWettkampfliste);
 		springLayout.putConstraint(SpringLayout.WEST, list, 0, SpringLayout.WEST, lblWettkampfliste);
@@ -216,8 +229,32 @@ public class CBundesjugendspiele {
 		frame.getContentPane().add(btnSortiere);
 		
 		JButton btnBeenden = new JButton("Beenden");
+		btnBeenden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnBeenden, 0, SpringLayout.NORTH, btnFindebesten);
 		springLayout.putConstraint(SpringLayout.EAST, btnBeenden, 0, SpringLayout.EAST, txtDisziplin);
+		
+		//Button Karte Hinzufügen Event
+		btnHinzufuegen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				m_strName = txtName.getText();
+				m_strVorname = txtVorname.getText();
+				m_strKlasse = txtKlasse.getText();
+				Integer m_iJahrgang = Integer.parseInt(txtJahrgang.getText());
+				Integer m_iLauf = Integer.parseInt(txtLauf.getText());
+				Integer m_iWurf = Integer.parseInt(txtWurf.getText());
+				Integer m_iSprung = Integer.parseInt(txtSprung.getText());
+
+				CWettkampfkarte newWettkampfkarte = new CWettkampfkarte(m_strName, m_strVorname, m_strKlasse, m_iJahrgang);
+				ListModel.addElement(newWettkampfkarte.name()+ " " + newWettkampfkarte.vorname() + " " + newWettkampfkarte.klasse() + " " + newWettkampfkarte.jahrgang());
+				
+			}
+		});
+		
 		frame.getContentPane().add(btnBeenden);
 	}
 }
