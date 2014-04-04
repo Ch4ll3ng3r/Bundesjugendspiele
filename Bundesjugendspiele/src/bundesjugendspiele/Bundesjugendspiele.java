@@ -194,27 +194,26 @@ public class Bundesjugendspiele {
 		txtWurf.setColumns(10);
 		
 		JButton btnHinzufuegen = new JButton("Neue Karte einf\u00FCgen");
-		springLayout.putConstraint(SpringLayout.NORTH, btnHinzufuegen, 36, SpringLayout.SOUTH, txtWurf);
-		springLayout.putConstraint(SpringLayout.WEST, btnHinzufuegen, 0, SpringLayout.WEST, lblNewLabel);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnHinzufuegen, 72, SpringLayout.SOUTH, txtWurf);
-		springLayout.putConstraint(SpringLayout.EAST, btnHinzufuegen, 0, SpringLayout.EAST, txtName);
+		springLayout.putConstraint(SpringLayout.NORTH, btnHinzufuegen, 16, SpringLayout.SOUTH, txtWurf);
+		springLayout.putConstraint(SpringLayout.WEST, btnHinzufuegen, 10, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(btnHinzufuegen);
 		
 		JLabel lblDisziplin = new JLabel("Disziplin");
-		springLayout.putConstraint(SpringLayout.NORTH, lblDisziplin, 11, SpringLayout.NORTH, btnHinzufuegen);
-		springLayout.putConstraint(SpringLayout.WEST, lblDisziplin, 7, SpringLayout.EAST, btnHinzufuegen);
+		springLayout.putConstraint(SpringLayout.WEST, lblDisziplin, 0, SpringLayout.WEST, lblNewLabel);
 		frame.getContentPane().add(lblDisziplin);
 		
 		txtDisziplin = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, txtDisziplin, 8, SpringLayout.NORTH, btnHinzufuegen);
+		springLayout.putConstraint(SpringLayout.SOUTH, btnHinzufuegen, -16, SpringLayout.NORTH, txtDisziplin);
+		springLayout.putConstraint(SpringLayout.EAST, txtDisziplin, 0, SpringLayout.EAST, txtName);
+		springLayout.putConstraint(SpringLayout.NORTH, txtDisziplin, -3, SpringLayout.NORTH, lblDisziplin);
 		springLayout.putConstraint(SpringLayout.WEST, txtDisziplin, 6, SpringLayout.EAST, lblDisziplin);
 		frame.getContentPane().add(txtDisziplin);
 		txtDisziplin.setColumns(10);
 		
 		final DefaultListModel ListModel = new DefaultListModel();
 		final JList list = new JList();
+		springLayout.putConstraint(SpringLayout.EAST, btnHinzufuegen, -159, SpringLayout.WEST, list);
 		list.setModel(ListModel);
-		springLayout.putConstraint(SpringLayout.EAST, txtDisziplin, -64, SpringLayout.WEST, list);
 		springLayout.putConstraint(SpringLayout.NORTH, list, 6, SpringLayout.SOUTH, lblWettkampfliste);
 		springLayout.putConstraint(SpringLayout.WEST, list, 0, SpringLayout.WEST, lblWettkampfliste);
 		springLayout.putConstraint(SpringLayout.SOUTH, list, 351, SpringLayout.NORTH, frame.getContentPane());
@@ -222,23 +221,24 @@ public class Bundesjugendspiele {
 		frame.getContentPane().add(list);
 		
 		JButton btnFindebesten = new JButton("Finde Besten");
+		springLayout.putConstraint(SpringLayout.SOUTH, lblDisziplin, -9, SpringLayout.NORTH, btnFindebesten);
 		springLayout.putConstraint(SpringLayout.WEST, btnFindebesten, 0, SpringLayout.WEST, lblNewLabel);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnFindebesten, 0, SpringLayout.SOUTH, list);
 		frame.getContentPane().add(btnFindebesten);
 		
 		JButton btnSortiere = new JButton("Sortiere");
-		springLayout.putConstraint(SpringLayout.NORTH, btnSortiere, 0, SpringLayout.NORTH, btnFindebesten);
-		springLayout.putConstraint(SpringLayout.WEST, btnSortiere, 6, SpringLayout.EAST, btnFindebesten);
+		springLayout.putConstraint(SpringLayout.NORTH, btnSortiere, 6, SpringLayout.SOUTH, txtDisziplin);
+		springLayout.putConstraint(SpringLayout.EAST, btnSortiere, 0, SpringLayout.EAST, txtName);
 		frame.getContentPane().add(btnSortiere);
 		
 		JButton btnBeenden = new JButton("Beenden");
+		springLayout.putConstraint(SpringLayout.SOUTH, btnBeenden, 0, SpringLayout.SOUTH, list);
+		springLayout.putConstraint(SpringLayout.EAST, btnBeenden, -35, SpringLayout.WEST, list);
 		btnBeenden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, btnBeenden, 0, SpringLayout.NORTH, btnFindebesten);
-		springLayout.putConstraint(SpringLayout.EAST, btnBeenden, 0, SpringLayout.EAST, txtDisziplin);
 		
 		//Button Karte Hinzufügen Event
 		btnHinzufuegen.addActionListener(new ActionListener() {
@@ -262,9 +262,9 @@ public class Bundesjugendspiele {
 					ListModel.clear();
 					for(int i = 0; i < arrSpieler.size(); i++){
 						ListModel.addElement(arrSpieler.get(i).vorname() + " " + arrSpieler.get(i).name() + " " 
-											+ arrSpieler.get(i).klasse() + " " + arrSpieler.get(i).jahrgang() + ": L"
-											+ arrSpieler.get(i).laufpunkte() + " S" + arrSpieler.get(i).sprungpunkte() + " W"
-											+ arrSpieler.get(i).wurfpunkte());
+											+ arrSpieler.get(i).klasse() + " " + arrSpieler.get(i).jahrgang() + ": L[["
+											+ arrSpieler.get(i).laufpunkte() + "] S[" + arrSpieler.get(i).sprungpunkte() + "] W["
+											+ arrSpieler.get(i).wurfpunkte() +"]");
 					}
 					
 					
