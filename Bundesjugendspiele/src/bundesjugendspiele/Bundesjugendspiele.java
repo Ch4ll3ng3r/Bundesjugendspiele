@@ -4,14 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.JProgressBar;
 
 import java.awt.Font;
 
@@ -20,8 +19,10 @@ import javax.swing.JList;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CBundesjugendspiele {
+public class Bundesjugendspiele {
 
 	private JFrame frame;
 	private JTextField txtName;
@@ -33,8 +34,10 @@ public class CBundesjugendspiele {
 	private JTextField txtWurf;
 	private JTextField txtDisziplin;
 	
-	private String m_strName, m_strVorname, m_strKlasse;
-	private int m_iJahrgang, m_iLauf, m_iWurf, m_iSprung, m_iDisziplin;
+	private String strName, strVorname, strKlasse;
+	private int iJahrgang, iLauf, iWurf, iSprung, iDisziplin;
+	
+	private List<Wettkampfkarte> arrSpieler = new ArrayList<Wettkampfkarte>(); 
 
 	/**
 	 * Launch the application.
@@ -45,7 +48,7 @@ public class CBundesjugendspiele {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CBundesjugendspiele window = new CBundesjugendspiele();
+					Bundesjugendspiele window = new Bundesjugendspiele();
 
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -58,7 +61,7 @@ public class CBundesjugendspiele {
 	/**
 	 * Create the application.
 	 */
-	public CBundesjugendspiele() {
+	public Bundesjugendspiele() {
 		initialize();
 	}
 
@@ -241,16 +244,37 @@ public class CBundesjugendspiele {
 		btnHinzufuegen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-				m_strName = txtName.getText();
-				m_strVorname = txtVorname.getText();
-				m_strKlasse = txtKlasse.getText();
-				Integer m_iJahrgang = Integer.parseInt(txtJahrgang.getText());
-				Integer m_iLauf = Integer.parseInt(txtLauf.getText());
-				Integer m_iWurf = Integer.parseInt(txtWurf.getText());
-				Integer m_iSprung = Integer.parseInt(txtSprung.getText());
+				try {
+					strName = txtName.getText();
+					strVorname = txtVorname.getText();
+					strKlasse = txtKlasse.getText();
+					Integer iJahrgang = Integer.parseInt(txtJahrgang.getText());
+					Integer iLauf = Integer.parseInt(txtLauf.getText());
+					Integer iWurf = Integer.parseInt(txtWurf.getText());
+					Integer iSprung = Integer.parseInt(txtSprung.getText());
 
-				CWettkampfkarte newWettkampfkarte = new CWettkampfkarte(m_strName, m_strVorname, m_strKlasse, m_iJahrgang);
-				ListModel.addElement(newWettkampfkarte.name()+ " " + newWettkampfkarte.vorname() + " " + newWettkampfkarte.klasse() + " " + newWettkampfkarte.jahrgang());
+					Wettkampfkarte newWettkampfkarte = new Wettkampfkarte(strName, strVorname, strKlasse, iJahrgang);
+					newWettkampfkarte.setzeLaufpunkte(iLauf);
+					newWettkampfkarte.setzeLaufpunkte(iWurf);
+					newWettkampfkarte.setzeLaufpunkte(iSprung);
+					arrSpieler.add(newWettkampfkarte);
+					System.out.println(iLauf +" " +iWurf + " " +iSprung);
+
+					ListModel.clear();
+					for(int i = 0; i < arrSpieler.size(); i++){
+						ListModel.addElement(arrSpieler.get(i).vorname() + " " + arrSpieler.get(i).name() + " " 
+											+ arrSpieler.get(i).klasse() + " " + arrSpieler.get(i).jahrgang() + ": L"
+											+ arrSpieler.get(i).laufpunkte() + " S" + arrSpieler.get(i).sprungpunkte() + " W"
+											+ arrSpieler.get(i).wurfpunkte());
+					}
+					
+					System.out.println(arrSpieler.get(0).wurfpunkte());
+					
+					
+				}
+				catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame, "Invalid input", "Input error", JOptionPane.ERROR_MESSAGE, null);
+				}
 				
 			}
 		});
