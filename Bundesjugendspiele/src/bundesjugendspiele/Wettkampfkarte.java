@@ -7,28 +7,28 @@ public class Wettkampfkarte {
 	private int iLaufpunkte, iSprungpunkte, iWurfpunkte;
 	
 	// Konstruktor
-	public Wettkampfkarte (String p_strName, String p_strVorname,
-							String p_strKlasse, int p_iJahrgang){
-		strName = p_strName;
-		strVorname = p_strVorname;
-		strKlasse = p_strKlasse;
-		iJahrgang = p_iJahrgang;
+	public Wettkampfkarte (String Name, String Vorname,
+							String Klasse, int Jahrgang){
+		strName = Name;
+		strVorname = Vorname;
+		strKlasse = Klasse;
+		iJahrgang = Jahrgang;
 		iLaufpunkte = 0;
 		iSprungpunkte = 0;
 		iWurfpunkte = 0;
 	}
 	
 	// Methoden ("Void-Funktionen"^^)
-	public void setzeLaufpunkte (int p_iPunkte){
-		iLaufpunkte = p_iPunkte;
+	public void setzeLaufpunkte (int Punkte){
+		iLaufpunkte = Punkte;
 	}
 	
-	public void setzeSprungpunkte (int p_iPunkte){
-		iSprungpunkte = p_iPunkte;
+	public void setzeSprungpunkte (int Punkte){
+		iSprungpunkte = Punkte;
 	}
 	
-	public void setzeWurfpunkte (int p_iPunkte){
-		iWurfpunkte = p_iPunkte;
+	public void setzeWurfpunkte (int Punkte){
+		iWurfpunkte = Punkte;
 	}
 	
 	// Funktionen

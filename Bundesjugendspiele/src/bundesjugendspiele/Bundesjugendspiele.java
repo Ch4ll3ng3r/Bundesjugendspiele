@@ -255,10 +255,9 @@ public class Bundesjugendspiele {
 
 					Wettkampfkarte newWettkampfkarte = new Wettkampfkarte(strName, strVorname, strKlasse, iJahrgang);
 					newWettkampfkarte.setzeLaufpunkte(iLauf);
-					newWettkampfkarte.setzeLaufpunkte(iWurf);
-					newWettkampfkarte.setzeLaufpunkte(iSprung);
+					newWettkampfkarte.setzeWurfpunkte(iWurf);
+					newWettkampfkarte.setzeSprungpunkte(iSprung);
 					arrSpieler.add(newWettkampfkarte);
-					System.out.println(iLauf +" " +iWurf + " " +iSprung);
 
 					ListModel.clear();
 					for(int i = 0; i < arrSpieler.size(); i++){
@@ -267,8 +266,6 @@ public class Bundesjugendspiele {
 											+ arrSpieler.get(i).laufpunkte() + " S" + arrSpieler.get(i).sprungpunkte() + " W"
 											+ arrSpieler.get(i).wurfpunkte());
 					}
-					
-					System.out.println(arrSpieler.get(0).wurfpunkte());
 					
 					
 				}
