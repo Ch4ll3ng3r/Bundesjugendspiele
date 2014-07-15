@@ -62,7 +62,8 @@ public class Bundesjugendspiele {
 	 * Create the application.
 	 */
 	public Bundesjugendspiele() {
-		initialize();
+		initialize(); // warum machst du nochmal ne extra funktion? 
+					  // du hättest den inhalt von initialize auch einfach hier rein schreiben können, oder?
 	}
 
 	/**
